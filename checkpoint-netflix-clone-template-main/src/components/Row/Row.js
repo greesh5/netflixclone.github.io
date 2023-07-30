@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../axios";
+import axios from "axios";
 import "./Row.css";
 import YouTube from "react-youtube";
 
@@ -17,6 +17,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
     }
     fetchData();
   }, [fetchUrl]);
+  console.log(movies);
 
   const opts = {
     height: "390",
@@ -25,16 +26,23 @@ function Row({ title, fetchUrl, isLargeRow }) {
       autoplay: 1,
     },
   };
+  
   const handleClick = async (movie, isLargeRow) => {
     if (trailerUrl) {
       setTrailerUrl("");
     } else if (!isLargeRow) {
-      let trailerurl = await axios.get(
-        `/movie/${movie.id}/videos?api_key=fb34530271b349314af0de263d16ab5a`
-      );
-      setTrailerUrl(trailerurl.data.results[0]?.key);
+      try {
+        const response = await axios.get(
+          `/movie/${movie.id}/videos?api_key=fb34530271b349314af0de263d16ab5a`
+        );
+        setTrailerUrl(response.data.results[0]?.key || "");
+      } catch (error) {
+        console.error("Error fetching trailer:", error);
+        setTrailerUrl(""); // Set trailerUrl to empty string on error
+      }
     }
   };
+  
 
   return (
     <div className="row">

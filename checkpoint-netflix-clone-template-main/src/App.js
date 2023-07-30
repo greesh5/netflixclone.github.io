@@ -1,8 +1,8 @@
 import "./App.css";
-import requests from "./requests";
-import Row from "./components/Row";
-import Banner from "./components/Banner";
-import Nav from "./components/Nav";
+import requests from "./request";
+import Row from "./components/Row/Row";
+import Banner from "./components/Banner/Banner";
+import Nav from "./components/Navbar/Navbar";
 
 function App() {
   return (
@@ -10,17 +10,17 @@ function App() {
       <Nav />
       <Banner />
       <Row
-        title="NETFLIX ORIGNALS"
+        title={"NETFLIX ORIGNALS"}
         fetchUrl={requests.fetchNetflixOriginals}
         isLargeRow
       />
-      <Row title="Trending Now" fetchUrl={requests.fetchTrending} />
+      <Row title={"Trending Now"} fetchUrl={requests.fetchTrending} />
       <Row title="Top Rated" fetchUrl={requests.fetchTopRated} />
-      <Row title="Action Movies" fetchUrl={requests.fetchActionMovies} />
-      <Row title="Comedy Movies" fetchUrl={requests.fetchComedyMovies} />
-      <Row title="Horror Movies" fetchUrl={requests.fetchHorrorMovies} />
+      <Row title="Action Movies" fetchUrl={requests.fetchAnimationMovies} />
+      <Row title="fantasy Movies" fetchUrl={requests.fetchFantasyMovies} />
+      <Row title="History Movies" fetchUrl={requests.fetchHistoryMovies} />
       <Row title="Romance Movies" fetchUrl={requests.fetchRomanceMovies} />
-      <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} />
+      {/* <Row title="Documentaries" fetchUrl={requests.fetchDocumentaries} /> */}
     </div>
   );
 }
